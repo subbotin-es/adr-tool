@@ -1,0 +1,7 @@
+node_modules/
+.dev.vars
+.wrangler/
+dist/
+*.tsbuildinfo
+.DS_Store
+coverage/
