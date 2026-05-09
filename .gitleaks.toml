@@ -1,0 +1,8 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ignore third-party dev dependency bundles (node_modules is git-ignored)"
+paths = [
+  '''node_modules''',
+]
