@@ -1,0 +1,44 @@
+# wrangler.toml — NO secrets here, only non-sensitive config
+name = "adr-tool"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+GITHUB_REPO_OWNER = "subbotin-es"
+GITHUB_REPO_NAME = "adr-tool"
+CONFLUENCE_SPACE_KEY = "ARCH"
+ALLOWED_ORIGINS = "https://adr-tool.pages.dev,https://adr.subbotin.es"
+ACCESS_POLICY_AUD = "FILL_AFTER_CF_ACCESS_SETUP"
+AI_PROVIDER = "anthropic"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "adr-tool-db"
+database_id = "FILL_AFTER_CREATION"
+
+[[kv_namespaces]]
+binding = "PROMPT_STORE"
+id = "FILL_AFTER_CREATION"
+
+[[unsafe.bindings]]
+name = "RATE_LIMITER"
+type = "ratelimit"
+namespace_id = "1001"
+simple = { limit = 10, period = 60 }
+
+[env.staging]
+name = "adr-tool-staging"
+vars = { ALLOWED_ORIGINS = "https://adr-tool-staging.pages.dev", AI_PROVIDER = "anthropic" }
+
+[[env.staging.d1_databases]]
+binding = "DB"
+database_name = "adr-tool-db-staging"
+database_id = "FILL_AFTER_CREATION"
+
+[[env.staging.kv_namespaces]]
+binding = "PROMPT_STORE"
+id = "FILL_AFTER_CREATION"
+
+[env.production]
+name = "adr-tool-production"
+vars = { ALLOWED_ORIGINS = "https://adr.subbotin.es", AI_PROVIDER = "anthropic" }
